@@ -166,7 +166,7 @@ const char *_get_first_word(char *s)
  *
  * Reurn: the formated string
  */
-char *const _format_split(char *s)
+char * const _format_split(char *s)
 {
 	char *str = malloc(sizeof(s) * _strlen(s));
 	int i, j = 0;

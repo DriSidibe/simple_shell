@@ -11,7 +11,7 @@
  * Return: Always 0.
  */
 int main(void)
-{	
+{
 
 	int islaunched = 0;
 
@@ -49,7 +49,7 @@ int main(void)
 			_printf("error fork");
 			return (1);
 		}
-		else if (pid == 0) 
+		else if (pid == 0)
 		{
 			free(cmd);
 			wait(NULL);
