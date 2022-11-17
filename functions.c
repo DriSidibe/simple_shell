@@ -37,6 +37,19 @@ char *_get_first_word(char *s, char *str, int j)
 }
 
 /**
+ * _off_end - get the first word of a string
+ * @s: the string
+ *
+ * Return: a pointer to the word
+ */
+char *_off_end(char *s)
+{
+	s[_strlen(s) - 1] = '\0';
+	return (s);
+}
+
+
+/**
  * _count_word - count the number of word
  * @s: the string to format
  *

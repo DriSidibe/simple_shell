@@ -37,8 +37,6 @@ int main(void)
 		{
 			if (getline(&cmd, &cmd_len, stream) != _strlen(cmd))
 				return (1);
-			if (_strcmp(cmd, "exit") == 0)
-				return (0);
 
 			newargv[1] = cmd;
 
