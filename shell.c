@@ -13,7 +13,7 @@
  *
  * Return: Always 0.
  */
-int main(__attribute__((unused)) int argc, char **argv)
+int main(void)
 {
 
 	char *cmd;
@@ -22,7 +22,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 	int isLaunched = 0;
 	pid_t pid;
 	size_t cmd_len = 255;
-	char *envp[] = {};
+	char *envp[] = {NULL};
 
 	while (isLaunched == 0)
 	{
@@ -37,12 +37,12 @@ int main(__attribute__((unused)) int argc, char **argv)
 		{
 			if (getline(&cmd, &cmd_len, stream) != _strlen(cmd))
 				return (1);
-			if (cmd == "exit")
+			if (_strcmp(cmd, "exit") == 0)
 				return (0);
 
 			newargv[1] = cmd;
 
-			if (execve(newargv[0], newargv, NULL) == -1)
+			if (execve(newargv[0], newargv, envp) == -1)
 				return (1);
 		}
 	}
