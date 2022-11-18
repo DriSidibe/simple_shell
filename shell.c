@@ -9,17 +9,19 @@
 
 /**
  * _rest_sh - check the code
- * @tmp_s1: the number of argument
  * @tmp_s2: the list of argument
  * @cmd: environment variables
  * @newargv: ...
  * @command: ...
- * @pid: ...
  *
  * Return: Always 0.
  */
-int _rest_sh(char *tmp_s2, char *tmp_s1, char *cmd, char **newargv, char *command, pid_t pid)
+int _rest_sh(char *tmp_s2, char *cmd, char **newargv, char *command)
 {
+	char *tmp_s3 = NULL;
+	char *tmp_s1 = NULL;
+	pid_t pid;
+
 	if (_strcmp(tmp_s2, command) != 0 || access(tmp_s2, X_OK) == 0)
 	{
 		pid = fork();
@@ -30,7 +32,9 @@ int _rest_sh(char *tmp_s2, char *tmp_s1, char *cmd, char **newargv, char *comman
 		else
 		{
 			tmp_s1 = malloc(sizeof(char) * _strlen(cmd));
-			newargv[1] = _strcct(_strcct(tmp_s2, " "), _get_first_word(cmd, tmp_s1, ' ', _strlen(command) + 1));
+			tmp_s3 = malloc(sizeof(char) * _strlen(cmd));
+			tmp_s3 = _get_first_word(cmd, tmp_s1, ' ', _strlen(command) + 1);
+			newargv[1] = _strcct(_strcct(tmp_s2, " "), tmp_s3);
 			if (execve(newargv[0], newargv, NULL) == -1)
 				return (1);
 		}
@@ -47,7 +51,11 @@ int _rest_sh(char *tmp_s2, char *tmp_s1, char *cmd, char **newargv, char *comman
  */
 void _print_env(char **env)
 {
-	_printf("%s", env[0]);
+	int i;
+	for (i = 0; i < 5; i++)
+	{
+		_printf("%s\n", env[i]);
+	}
 }
 
 /**
@@ -63,7 +71,6 @@ int main(int argc, __attribute__((unused)) char **argv, char *env[])
 	char *cmd;
 	int is_launched = 0, i;
 	FILE *stream = stdin;
-	pid_t pid = 0;
 	size_t cmd_len = 255;
 	char *path[] = {NULL};
 	char *tmp_s1, *tmp_s2;
@@ -94,7 +101,7 @@ int main(int argc, __attribute__((unused)) char **argv, char *env[])
 		command = malloc(sizeof(char) * _strlen(cmd));
 		command = _get_first_word(cmd, tmp_s1, ' ', 0);
 		tmp_s2 = _test_path_exist(command, path[0]);
-		_rest_sh(tmp_s2, tmp_s1, cmd, newargv, command, pid);
+		_rest_sh(tmp_s2, cmd, newargv, command);
 	}
 	return (0);
 }
