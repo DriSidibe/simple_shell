@@ -88,7 +88,7 @@ int main(int argc, __attribute__((unused)) char **argv, char *env[])
 	path[0] = _get_first_word(path[0], tmp_s1, '\0', 5);
 	while (is_launched == 0)
 	{
-		_printf(":) ");
+		_printf("#cisfun$ ");
 		if (getline(&cmd, &cmd_len, stream) != _strlen(cmd))
 			return (1);
 		if (_strcmp(cmd, "exit\n") == 0)
