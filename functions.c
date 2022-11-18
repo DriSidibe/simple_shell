@@ -14,7 +14,7 @@
  *
  * Return: a pointer to the word
  */
-char *_get_first_word(char *s, char *str, int j)
+char *_get_first_word(char *s, char *str, char d, int j)
 {
 	int i, k = 0;
 
@@ -23,16 +23,13 @@ char *_get_first_word(char *s, char *str, int j)
 		for (i = j; s[i] != '\0'; i++)
 		{
 			str[k] = s[i];
-			if (s[i + 1] == ' ' || s[i + 1] == '\0' || s[i + 1] == '\n')
+			if (s[i + 1] == d || s[i + 1] == '\0' || s[i + 1] == '\n')
 				return (str);
 			k++;
 		}
 	}
 	else
-	{
-		_printf("error get_first_word");
 		return (NULL);
-	}
 	return (str);
 }
 
@@ -42,15 +39,15 @@ char *_get_first_word(char *s, char *str, int j)
  *
  * Return: the number of word
  */
-int _count_word(char *s)
+int _count_word(char *s, char d)
 {
 	int nbr_wrd = 0;
 	int i;
 
 	for (i = 0; i < _strlen(s) - 2; i++)
 	{
-		if (s[i] != ' ' && s[i + 1] == ' ')
-			if (s[i + 2] != ' ')
+		if (s[i] != d && s[i + 1] == d)
+			if (s[i + 2] != d)
 				nbr_wrd++;
 	}
 	return (nbr_wrd + 1);
@@ -65,12 +62,27 @@ int _count_word(char *s)
  */
 int _strcmp(char *s1, char *s2)
 {
-        int i;
+	int i;
 
-        for (i = 0; s1[i] != '\0'; i++)
-        {
-                if (s2[i] == '\0' || s1[i] != s2[i])
-                        return (1);
-        }
-        return (0);
+	for (i = 0; s1[i] != '\0'; i++)
+	{
+		if (s2[i] == '\0' || s1[i] != s2[i])
+			return (1);
+	}
+	return (0);
+}
+
+/**
+ * _strcpy - copy s1 in s2
+ * @s1: the first string
+ * @s2: the second string
+ */
+void _strcpy(char *s1, char *s2)
+{
+	int i;
+
+	for (i = 0; s1[i] != '\0'; i++)
+	{
+		s2[i] = s1[i];
+	}
 }
